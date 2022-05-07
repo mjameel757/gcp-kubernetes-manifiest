@@ -1,0 +1,49 @@
+apiVersion: "acid.zalan.do/v1"
+kind: postgresql
+metadata:
+  name: fx-postgres
+  namespace: default
+spec:
+  teamId: "fx"
+  volume:
+    size: 200Gi
+    storageClass: premium-rwo-retain 
+  resources:
+    requests:
+      memory: "3Gi"
+      cpu: "1"
+    limits:
+      memory: "4Gi"
+      cpu: "2"
+  numberOfInstances: 2
+  users:
+    fx_admin:
+    - superuser
+    - createdb
+  databases:
+    fx: fx_admin  # dbname: owner
+  preparedDatabases:
+    fx:
+      defaultUsers: false
+      extensions:
+        pg_partman: public
+        pgcrypto: public
+      schemas:
+        data: {}
+        history:
+          defaultRoles: false
+          defaultUsers: false
+  patroni:
+    pg_hba:
+      - hostssl all +fx_admin all pam
+      - local all all trust
+      - local replication all trust
+      - host replication standby all md5
+      - hostssl all all 0.0.0.0/0 md5
+      - host    all all 0.0.0.0/0 md5
+  postgresql:
+    version: "10"
+
+
+
+

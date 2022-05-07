@@ -1,0 +1,46 @@
+apiVersion: elasticsearch.k8s.elastic.co/v1
+kind: Elasticsearch
+metadata:
+  name: elasticsearch
+spec:
+  version: 6.8.12
+  http:
+    tls:
+      selfSignedCertificate:
+        disabled: true
+  nodeSets:
+  - name: default
+    count: 3
+    podTemplate:
+       spec:
+         containers:
+         - name: elasticsearch
+           env:
+           - name: ES_JAVA_OPTS
+             value: -Xms9g -Xmx9g
+           resources:
+             requests:
+               memory: 9Gi
+               cpu: 1
+             limits:
+               memory: 10Gi
+               cpu: 2
+    config:
+      node.store.allow_mmap: false
+      xpack.security.enabled: false
+      xpack.security.authc:
+          anonymous:
+            username: anonymous
+            roles: superuser
+            authz_exception: false
+      #xpack.security.transport.ssl.enabled: false
+    volumeClaimTemplates:
+    - metadata:
+        name: elasticsearch-data
+      spec:
+        accessModes:
+        - ReadWriteOnce
+        resources:
+          requests:
+            storage: 400Gi
+        storageClassName: premium-rwo-retain

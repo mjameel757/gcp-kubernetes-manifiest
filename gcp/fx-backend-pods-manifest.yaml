@@ -1,0 +1,287 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+ name: vc-git-bot
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: vc-git-bot
+  template:
+    metadata:
+       labels:
+        app: vc-git-bot
+    spec:
+      containers:
+      - name: vc-git-bot
+        image: fxlabs/vc-git-skill-bot:latest
+        resources:
+          requests:
+            memory: 4G
+            cpu: 0.5
+          limits:
+            memory: 6G
+            cpu: 1        
+        envFrom:
+        - configMapRef:
+           name: dependents-config
+      imagePullSecrets:
+        - name: dockerlogin
+
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+ name: mail-bot
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mail-bot
+  template:
+    metadata:
+      labels:
+       app: mail-bot
+    spec:
+      containers:
+      - name: mail-bot
+        image: fxlabs/notification-email-skill-bot:latest
+        resources:
+          requests:
+            memory: 512M
+            cpu: 0.5
+          limits:
+            memory: 1G
+            cpu: 1  
+        envFrom:
+        - configMapRef:
+           name: dependents-config
+      imagePullSecrets:
+       - name: dockerlogin
+
+       
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+ name: github-bot
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+     app: github-bot
+  template:
+    metadata:
+      labels:
+       app: github-bot
+    spec:
+      containers:
+      - name: github-bot
+        image: fxlabs/issue-tracker-github-skill-bot:latest
+        resources:
+          requests:
+            memory: 1G
+            cpu: 0.5
+          limits:
+            memory: 1G
+            cpu: 1  
+        envFrom:
+        - configMapRef:
+            name: dependents-config
+      imagePullSecrets:
+       - name: dockerlogin
+
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+ name: fx-it-bot
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: fx-it-bot
+  template:
+    metadata:
+     labels:
+      app: fx-it-bot
+    spec:
+      containers:
+      - name: fx-it-bot
+        image: fxlabs/issue-tracker-fx-skill-bot:latest
+        resources:
+          requests:
+            memory: 1G
+            cpu: 0.5
+          limits:
+            memory: 2G
+            cpu: 1  
+        envFrom:
+        - configMapRef:
+            name: dependents-config
+      imagePullSecrets:
+       - name: dockerlogin
+
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+ name: jira-bot
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+     app: jira-bot
+  template:
+    metadata:
+     labels:
+      app: jira-bot
+    spec:
+      containers:
+      - name: jira-bot
+        image: fxlabs/issue-tracker-jira-skill-bot:latest
+        resources:
+          requests:
+            memory: 1G
+            cpu: 0.5
+          limits:
+            memory: 2G
+            cpu: 1  
+        envFrom:
+        - configMapRef:
+           name: dependents-config
+      imagePullSecrets:
+       - name: dockerlogin
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: slack-bot
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+     app: slack-bot
+  template:
+    metadata:
+     labels:
+       app: slack-bot
+    spec:
+      containers:
+      - name: slack-bot
+        image: fxlabs/notification-slack-skill-bot:latest
+        resources:
+          requests:
+            memory: 1G
+            cpu: 0.5
+          limits:
+            memory: 2G
+            cpu: 1  
+        envFrom:
+        - configMapRef:
+           name: dependents-config
+      imagePullSecrets:
+       - name: dockerlogin
+
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+ name: aws-bot
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+     app: aws-bot
+  template:
+    metadata:
+     labels:
+      app: aws-bot
+    spec:
+      containers:
+      - name: aws-bot
+        image: fxlabs/cloud-aws-skill-bot:latest
+        resources:
+          requests:
+            memory: 1G
+            cpu: 0.5
+          limits:
+            memory: 2G
+            cpu: 1  
+        envFrom:
+        - configMapRef:
+           name: dependents-config
+      imagePullSecrets:
+       - name: dockerlogin
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: gateway-bot
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+     app: gateway-bot
+  template:
+    metadata:
+      labels:
+        app: gateway-bot
+    spec:
+      containers:
+      - name: gateway-bot
+        image: fxlabs/api-gateway-skill-bot:latest
+        resources:
+          requests:
+            memory: 1G
+            cpu: 0.5
+          limits:
+            memory: 2G
+            cpu: 1  
+        envFrom:
+        - configMapRef:
+            name: dependents-config
+      imagePullSecrets:
+      - name: dockerlogin
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: reports-bot
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+     app: reports-bot
+  template:
+    metadata:
+     labels:
+       app: reports-bot
+    spec:
+      containers:
+      - name: reports-bot
+        image: fxlabs/reports-bot:latest
+        resources:
+          requests:
+            memory: 2G
+            cpu: 0.5
+          limits:
+            memory: 4G
+            cpu: 1  
+        envFrom:
+        - configMapRef:
+           name: dependents-config
+      imagePullSecrets:
+      - name: dockerlogin
+
+
+
+

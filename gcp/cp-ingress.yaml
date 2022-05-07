@@ -1,0 +1,20 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: fx-ingres
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    nginx.ingress.kubernetes.io/proxy-body-size: 100m 
+spec:
+  #tls:
+  #  secretName: fx-tls-secret 
+  rules:
+    - https:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: fx-control-plane
+                port:
+                  number: 8080

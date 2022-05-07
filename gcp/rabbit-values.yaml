@@ -1,0 +1,133 @@
+
+# global:
+#   storageClass: myStorageClass
+
+replicas: 3
+
+rabbitmq:
+  username: fx_admin
+  password: fx_rabbit_password_1243
+  erlangCookie: 6a8ef42097f82602b9d9bc4c27dbe8bd
+  extraConfiguration: |
+    vm_memory_high_watermark.absolute = 1500MiB
+    management.path_prefix = /v2
+    management.load_definitions = /app/load_definition.json
+  loadDefinition:
+    enabled: true
+    secretName: load-definition
+  tls:
+    enabled: true
+    failIfNoPeerCert: false
+    sslOptionsVerify: verify_none
+    caCertificate: |-
+      -----BEGIN CERTIFICATE-----
+      MIIDRTCCAi2gAwIBAgIJAPvamOkYwv39MA0GCSqGSIb3DQEBCwUAMDExIDAeBgNV
+      BAMMF1RMU0dlblNlbGZTaWduZWR0Um9vdENBMQ0wCwYDVQQHDAQkJCQkMB4XDTIy
+      MDMwOTE4MjczMloXDTMyMDMwNjE4MjczMlowMTEgMB4GA1UEAwwXVExTR2VuU2Vs
+      ZlNpZ25lZHRSb290Q0ExDTALBgNVBAcMBCQkJCQwggEiMA0GCSqGSIb3DQEBAQUA
+      A4IBDwAwggEKAoIBAQDGTZ1V3KxjNkmyvWFCT49Miz3j11eh0jqWODbvXddkqMbz
+      lzuKgjyxgYmSQFjkXKDyYcd4AS3SBY0TGWLf8i7YWd2UmXZLU18+eH/M1gqmgQNb
+      ov5z3y5J9VewIjQ0nzKtpQ3onAfI9BERF0O9o8gZhyYDvOqOHLWJ/z4mQbNjm3ow
+      Ou6CdZGA2tSp7es6ZTJuHEYwurfbmo0Xt3VpR6MgGO6GU4vNe8m4xTG3NhkTk5nQ
+      ewXIJXS+vhEpiO0Eoi7rBtpYx/02lPXkcmhPlgDMJyNh15aA0neyV2v+FpZLLXGo
+      PqfOo7pKUaPg2XJv+AK4s6Te1J/DPqww7NG90Il9AgMBAAGjYDBeMAsGA1UdDwQE
+      AwIBBjAdBgNVHQ4EFgQUoMhdqZHenfb7RoCTUkwIBd/h+CAwHwYDVR0jBBgwFoAU
+      oMhdqZHenfb7RoCTUkwIBd/h+CAwDwYDVR0TAQH/BAUwAwEB/zANBgkqhkiG9w0B
+      AQsFAAOCAQEAjtQ0oW9mgoHMXGLF/4Nh+1mdbzzt3W/fm9fAmEi3YjtLF/OMElsl
+      JBdtcU49m11LqM6adQi+n+0aAVB28VEEyoYbjc4J45j0bAoELzWzyJyxaZ+JX2Vm
+      TOJN84p+CwS9s6js/8i85GZe6l/XMSlmTick/ryGZ8OsyoivlguUGy0gOPbmN09c
+      F7g4MJ6l3PyrlohQ7sInyRytyvxUXxTolHne1cJqPfvJ4gEFpANzhLnkLSUAq3XC
+      lloAeA8dotpmeW6JIzOaTqp//0pNL8jBmKHG906nNo2Xn/EY7uRbLF2J67QkZWVy
+      76P2NGi5kWedahOFXS271sINCGFM8klQCA==
+      -----END CERTIFICATE-----
+    serverCertificate: |-
+      -----BEGIN CERTIFICATE-----
+      MIIDdzCCAl+gAwIBAgIBATANBgkqhkiG9w0BAQsFADAxMSAwHgYDVQQDDBdUTFNH
+      ZW5TZWxmU2lnbmVkdFJvb3RDQTENMAsGA1UEBwwEJCQkJDAeFw0yMjAzMDkxODI3
+      MzJaFw0zMjAzMDYxODI3MzJaMCgxFTATBgNVBAMMDDM0Ljc1LjgxLjE3OTEPMA0G
+      A1UECgwGc2VydmVyMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAvg6Q
+      6DofozJwApXTEvz3Y23UTC7Eh2GtEL8cO0069d0zgiOel0cQRI00h4ZtxVQPrmN+
+      3fS0OYQ414RMgtrqevnrXBsD3ECF6bkZclcidM2d8IWSub/eaFnNczBk4jXAS0Fb
+      1oyoULApicWDL2427cATDvViAkCA96JUuQCAaZDKKZ5ypAh7AbRQf/g1TS/w3HGa
+      f0fn9Zxbf3f0ubSV4QIkkHaQ2CEVjAniVp9pNc+kgXxJ9pzlBlCOlpZ7rtDzqxZr
+      iCZPVSNWqxJGr3jLW2nquAksEgvYNJzkzmNZtddMulBALWSwUjmjuu+Ii1ULNrps
+      7hZbQkxm96YbOHgk2QIDAQABo4GiMIGfMAkGA1UdEwQCMAAwCwYDVR0PBAQDAgWg
+      MBMGA1UdJQQMMAoGCCsGAQUFBwMBMDAGA1UdEQQpMCeCDDM0Ljc1LjgxLjE3OYIM
+      MTkyLjE2OC4xLjM1gglsb2NhbGhvc3QwHQYDVR0OBBYEFJ1IS6tkp0lb15rWuosh
+      xgM5rxOfMB8GA1UdIwQYMBaAFKDIXamR3p32+0aAk1JMCAXf4fggMA0GCSqGSIb3
+      DQEBCwUAA4IBAQBkb+HTi6q2D1buZkxu1UDZwNCZXH+1hXQTj51O3preHgP/LbtP
+      2M6p0mnzuDccbY6ErMDXvK7zXXP1epvgY19x2Mt4AYz7F8rCp3UHtX88EFsuHqFk
+      vLBJ6GJ1T81Yj3uusmO2D3NIjcQwpwI/RInb3uaFzky8MpdTjQw1AdG9isLF8HO2
+      +a+K79X3tNuOk8yjGWkKVLdi7tt5MBDrqdqK417ub9DO9Zp4FQoWgG75G1kCcz8r
+      MUGG1aE2IcuULhWN9fZaSJmwfmuX9hYZppzdDVhZ+lpaIk5eRLJEQEaBcFLa3oaN
+      6v0peFtOOSngEyj+uh6EkW8SsrmaohC9edx2
+      -----END CERTIFICATE-----
+    serverKey: |-
+      -----BEGIN PRIVATE KEY-----
+      MIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQC+DpDoOh+jMnAC
+      ldMS/PdjbdRMLsSHYa0Qvxw7TTr13TOCI56XRxBEjTSHhm3FVA+uY37d9LQ5hDjX
+      hEyC2up6+etcGwPcQIXpuRlyVyJ0zZ3whZK5v95oWc1zMGTiNcBLQVvWjKhQsCmJ
+      xYMvbjbtwBMO9WICQID3olS5AIBpkMopnnKkCHsBtFB/+DVNL/DccZp/R+f1nFt/
+      d/S5tJXhAiSQdpDYIRWMCeJWn2k1z6SBfEn2nOUGUI6Wlnuu0POrFmuIJk9VI1ar
+      EkaveMtbaeq4CSwSC9g0nOTOY1m110y6UEAtZLBSOaO674iLVQs2umzuFltCTGb3
+      phs4eCTZAgMBAAECggEAOoHjbAoQmT26q6ER1GOZiLtTwowXJhIUo/YhK8RPpUaO
+      R77NYIaY5HGPvTTN8BQ7q5Snho6BOL+SfA4XO6VGz8rGAJm0a4ZVcyjvQ3q9ebWe
+      rF+CVrpRLlCO5an9NIIVi1U4f2jXm9dPQkFSbDSCplgdxdoWbNkMmq8XY8hav6Qx
+      uHL0TpQYUIDWQp1akveSUOrHOvJME6AHlGPQLATlmKipirxjeJbTItKkkg2pdcrz
+      MQTOyJJXmzCBK8Z10qJN4eGyGyq6EZVFYaaZuk82jdSDXPTGM08y1H6Gak5ck38G
+      1RETpfY1F0r1gWlqmXGOymW06eIanGBbJKDsGaKHAQKBgQDwYzO13n6Q9okvwfvU
+      J83xZFVxOtTnMvjpc10YGzYAS+XGNXDigmMiUn1OehgKGuxfDx6XP3rUNaHGYauZ
+      4B9aWVbhEXk5Jfr/9TRMQ6axbi7FbPV/aoKsv6PNYQvOcp25FDsvPNkF/7ByuiLM
+      LR3vPdMEz5q5qmoX7KHZ+FtC4QKBgQDKZosPLgO+Dln6hGh/82YrQ+tICqguocXN
+      /HrVg/LBuGiDNkNcBZg98SLPXSdpNl3sTp8GAD7Nz4bR5cS0v2bkcshvnY6nz8Uw
+      ApJ5WaAfA7CN5SuD2HwcbKUAuotkgyTwuJ89cHpEoGuQsto2G5ie/IoTTGqyp2Pu
+      xaHrNk8Y+QKBgQDPKb7jqkZK6Zwao0NCd7c8o+oadcgLI1tt3LTK1JB6Ou5fHakW
+      G6YRayOAISpccw1ncqE7WUKiZUHwtDVtm7+JXlrIBgYBYSDpusiCPP8IA9uc2qTL
+      VOAevd0NXugM16vjV3MV54tkZxEKHi1k5jDY/9++UqeWAC4ERjLJpQYJIQKBgHP0
+      b3KQ4CAARNhbBytWnI/o52BsipG8qIAsR4sPfwIwzd9uNQUBR4klHtZB/hQuy3xY
+      Ro6/kTuDyy9xPVJ33VC/2cjoMRQ+2i95KcVP7YYXLQz94AI3AlOegqF6PeWlpIIs
+      oz4ltEagyT8q2AzrnnJnKAuKWg5kC8J9gxgoEwSxAoGANIX8dgyxp2L6gLRHbKAm
+      g0pgO9sI8qtbtLoagg+FMPFzkW+k4PisWsX95IbzbccbSijq+mVeXH87N1qUil4Y
+      ZEtFqXh5CWOuvkrjLnGfJKuQTGYD0/9+jduWZUIWF/tY+PJHtMADWQ2FzvT0mjXl
+      neBt+6h4sK8FgwI7HXzWGbY=
+      -----END PRIVATE KEY-----
+
+
+persistence:
+  size: 20Gi
+
+resources:
+  limits:
+    cpu: "1"
+    memory: "4Gi"
+  requests:
+    cpu: "0.5"
+    memory: "3Gi"
+
+extraSecrets:
+  load-definition:
+    load_definition.json: |
+      {
+          "users": [
+            {
+              "name": "fx_admin",
+              "password_hash": "jgYvgh3VO6UnHjmQGL81lAmEnyeM3YNZ8p9pOATfolpNmcPf",
+              "hashing_algorithm": "rabbit_password_hashing_sha256",
+              "tags": "administrator"
+            }
+          ],
+          "vhosts": [
+            {
+              "name": "fx"
+            }
+          ],
+          "permissions": [
+            {
+              "user": "fx_admin",
+              "vhost": "fx",
+              "configure": ".*",
+              "write": ".*",
+              "read": ".*"
+            }
+          ]
+        }

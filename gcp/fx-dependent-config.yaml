@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: dependents-config
+  labels:
+    app: rabbitmq
+data:
+  FX_HOST: fx-rabbitmq
+  FX_PORT: "5672"
+  FX_USERNAME: fx_admin
+  FX_PASSWORD: fx_rabbit_password_1243
+  JAVA_OPTS: "-Xms1g -Xmx2g"
+  FX_GPASSWORD: fxlabs
+  POSTGRES_HOST: fx-postgres
+  POSTGRES_DB: fx
+  POSTGRES_USER: fx_admin
+  POSTGRES_PASSWORD: fx_postgres_password_1243
+  ELASTICSEARCH_HOST: fx-elasticsearch
+  FX_AZURE_CONN_STRING: HGM0qy5rIqYvHEFhNtg4FMIFdeIa8y41IiPfbMK0qzljj8eNKeclbOsC9lR+8u2Lnf6XyjZJ+NvXpaghzoTmrj4ybXE9rDi5mk52j8lnATqJnQldw7qJgqZlpkk1RrIVRHjN4rRIUUrmBezhp71Gr23aae/6f7j/RRJA2dmCabepsmyL18d/NVXkLygfFU40QPnqJpgTSGkOWJUxBrBpHb/8kY19HQL2x7RdmJPqBbaQZbu9kb3/IkDGAL0UrFRaGXL4EOpoYBm0aqif1VW0KA==
+  FX_AZURE_CONTAINER: dev-reports

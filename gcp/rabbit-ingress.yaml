@@ -1,0 +1,17 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: fx-rabbitmq
+  annotations:
+    kubernetes.io/ingress.class: nginx
+spec:
+  rules:
+    - http:
+        paths:
+          - path: /v2/
+            pathType: Prefix
+            backend:
+              service:
+                name: fx-rabbitmq
+                port:
+                  number: 15672

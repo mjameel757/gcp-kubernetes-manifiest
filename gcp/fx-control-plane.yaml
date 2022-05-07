@@ -1,0 +1,58 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+ name: fx-control-plane
+spec:
+ replicas: 2
+ selector:
+   matchLabels:
+     app: fx-control-plane
+ template:
+   metadata:
+     labels:
+       app: fx-control-plane
+   spec:
+     containers:
+       - name: fx-control-plane
+         image: fxlabs/control-plane:latest
+         imagePullPolicy: Always
+         ports:
+         - containerPort: 8080
+         env:
+         - name: ES_JAVA_OPTS
+           value: -Xms4g -Xmx4g
+         - name: concurrentConsumers
+           value: "30"
+         - name: maxConcurrentConsumers
+           value: "30"
+         resources:
+           requests: # Minimum amount of resources requested
+              cpu: 2
+              memory: 6G
+           limits: # Maximum amount of resources requested
+              cpu: 4
+              memory: 8G
+         envFrom:
+         - secretRef:
+             name: controlplane-secret
+     imagePullSecrets:
+       - name: dockerlogin
+
+
+
+
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+ name: fx-control-plane
+ labels:
+   app: fx-control-plane
+spec:
+ type: ClusterIP
+ ports:
+  - port: 8080
+ selector:
+  app: fx-control-plane
+
